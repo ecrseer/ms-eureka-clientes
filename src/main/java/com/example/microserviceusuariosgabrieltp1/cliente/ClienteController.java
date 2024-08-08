@@ -20,18 +20,24 @@ public class ClienteController {
     @GetMapping("/todos")
     public ResponseEntity<List<Cliente>> atualizaCliente() {
         List<Cliente> clientes=clienteService.getClientes();
-        Cliente mock = new Cliente();
-        mock.setNome("trem bala");
-        List <Cliente> clientess = List.of(mock);
         return ResponseEntity.status(HttpStatus.CREATED).body(clientes);
     }
 
-    @PutMapping("/atualizar")
-    public ResponseEntity<Cliente> atualizaCliente(@RequestBody Cliente usuario) {
-//        Cliente atualizado = this.usuarioService.atualizar(usuario);
-          Cliente atualizado = new Cliente();
+    @PostMapping("/criar")
+    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente) {
+        Cliente salvo=clienteService.salvarCliente(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(atualizado);
+    @PutMapping("/atualizar")
+    public ResponseEntity<Cliente> atualizaCliente(@RequestBody Cliente dto) {
+        Cliente editado=clienteService.editarCliente(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(editado);
+    }
+
+    @DeleteMapping("/remover")
+    public ResponseEntity<Cliente> removerCliente(@RequestParam Long idCliente) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.excluirCliente(idCliente));
     }
 
 

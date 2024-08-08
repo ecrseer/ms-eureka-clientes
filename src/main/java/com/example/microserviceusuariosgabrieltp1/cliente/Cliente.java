@@ -23,6 +23,15 @@ public class Cliente {
         this.email = email;
     }
 
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
+    public Cliente(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     public Cliente() {
     }
 
